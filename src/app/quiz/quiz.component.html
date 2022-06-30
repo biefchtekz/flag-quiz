@@ -1,0 +1,15 @@
+<div class="wrap">
+  <img
+    src="http://purecatamphetamine.github.io/country-flag-icons/3x2/{{randCountry}}.svg"
+    class="flag"
+  />
+  <div class="answer-buttons" id="answerButtons">
+    <button class="answ-btn" (click)="checkAnsw(0, $event)">{{currLocale[answButtons[0]].name}}</button>
+    <button class="answ-btn" (click)="checkAnsw(1, $event)">{{currLocale[answButtons[1]].name}}</button>
+    <button class="answ-btn" (click)="checkAnsw(2, $event)">{{currLocale[answButtons[2]].name}}</button>
+    <button class="answ-btn" (click)="checkAnsw(3, $event)">{{currLocale[answButtons[3]].name}}</button>
+  </div>
+</div>
+
+
+
