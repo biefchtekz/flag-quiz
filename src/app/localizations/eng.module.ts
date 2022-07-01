@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class EngModule {
 
-  CountryCodes = [
+  Countries = [
     {"name": "Afghanistan", "code": "AF"},
     {"name": "Albania", "code": "AL"},
     {"name": "Algeria", "code": "DZ"},
@@ -177,5 +177,9 @@ export class EngModule {
   ]
 
   startButton = 'Start Your Journey'
-
+  homeButton = 'Home'
+  nextButton = 'Next'
+  home = 'Really want to leave?'
+  lost = 'You wasted all attempts'
+  langChoose = 'Choose language'
 }

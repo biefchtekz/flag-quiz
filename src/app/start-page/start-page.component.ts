@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class StartPageComponent implements OnInit {
 
   randFlag: string = 'UA'
-  countryCode = this.EngLocale.CountryCodes
+  countryCode = this.EngLocale.Countries
   startState: boolean = true;
   currlocale = ''
 
@@ -27,15 +27,14 @@ export class StartPageComponent implements OnInit {
     if (localStorage.getItem("lang") == 1) this.currlocale = this.UALocale.startButton
     //@ts-ignore
     else if (localStorage.getItem("lang") == 2) this.currlocale = this.EngLocale.startButton
-    // setInterval(() => {
-    //   let randNum = Math.floor(Math.random() * this.countryCode.length) + 0
-    //   this.randFlag = this.countryCode[randNum].code
-    // },1000)
+    setInterval(() => {
+      let randNum = Math.floor(Math.random() * this.countryCode.length) + 0
+      this.randFlag = this.countryCode[randNum].code
+    },1000)
     sessionStorage.clear()
   }
 
   start() {
-    // this.sharedService.sendClickEvent()
     sessionStorage.setItem('startState', '1')
     this.router.navigate(['/play'])
   }

@@ -1,4 +1,4 @@
-import {Injectable, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UAModule {
 
-  countriesUa = [
+  Countries = [
     { "name" : "Афганістан" },
     { "name" : "Албанія" },
     { "name" : "Алжир" },
@@ -177,5 +177,10 @@ export class UAModule {
   ]
 
   startButton = 'Розпочати Подорож'
+  homeButton = 'На головну'
+  nextButton = 'Далі'
+  home = 'Дійсно закінчити гру?'
+  lost = 'Ти витратив усі спроби'
+  langChoose = 'Виберіть мову'
 
 }

@@ -1,8 +1,8 @@
 body{
-  overflow: hidden;
   margin: 0;
   padding: 0;
   font-family: Calibri;
+  user-select: none;
 }
 .flag{
   width: 100%;
@@ -10,16 +10,16 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 .wrap{
-  margin: auto;
+  margin: 0 auto;
   max-width: 80vmin;
   display: flex;
   align-items: center;
   flex-flow: column;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .answer-buttons{
-  padding: 3vmin 0;
+  padding: 3vmin 0 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -28,12 +28,15 @@ body{
     background-color: rgba(236, 236, 236, 0.5);
     width: 49%;
     margin-top: 2vmin;
-    height: 5vmin;
+    height: auto;
+    line-height: 200%;
     cursor: pointer;
     border-radius: 1vmin;
     border: 1px solid rgba(0, 0, 0, 0.3);
     transition: background-color .2s;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-family: Calibri;
+    font-weight: 600;
     &:hover{
       background-color: rgb(236, 236, 236);
     }
@@ -86,7 +89,8 @@ body{
     background-color: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.7);
     border-radius: 1rem;
-    width: 50%;
+    width: auto;
+    padding: 0.5rem 1.5rem;
     height: 100%;
     cursor: pointer;
     transition: background-color .2s;
@@ -98,11 +102,43 @@ body{
   }
 }
 
+.nav-buttons{
+  margin-top: 1rem;
+  padding-top: 0;
+  button{
+    background-color: rgba(0, 128, 0, 0.8);
+    color: white;
+    &:hover{
+      background-color: rgba(0, 128, 0, 0.5);
+    }
+  }
+  .btn-next{
+    &.invalid{
+      background-color: rgba(0, 128, 0, 0.3);
+      pointer-events: none;
+    }
+  }
+}
 
-
-@media screen and (max-width: 780px) {
+.hp{
+  font-size: 3rem;
+  color: red;
+  &.invalid{
+    color: #dadada;
+  }
+}
+@media screen and (max-width: 600px) {
+  .wrap{
+    padding: 1rem 20px 0;
+    margin: 0;
+    max-width: 100%;
+  }
   .answer-buttons button{
     width: 100%;
-    height: 10vmin;
+    height: auto;
+    line-height: 200%;
+  }
+  .nav-buttons{
+    flex-direction: column-reverse;
   }
 }

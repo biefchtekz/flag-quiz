@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Subject} from "rxjs";
+import {UAModule} from "../localizations/ua.module";
+import {EngModule} from "../localizations/eng.module";
 
 @Component({
   selector: 'app-navbar',
@@ -8,14 +9,18 @@ import {Subject} from "rxjs";
 })
 export class NavbarComponent implements OnInit {
 
-  EngLocale = false
-  constructor() { }
+  currLocale: any
+
+  constructor(
+    private UALocal : UAModule,
+    private EngLocal: EngModule
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  log() {
-    console.log(this.EngLocale)
+    // @ts-ignore
+    if (localStorage.getItem("lang") == 1) {this.currLocale = this.UALocal}
+    // @ts-ignore
+    else if (localStorage.getItem("lang") == 2) {this.currLocale = this.EngLocal}
   }
 
   rememberLocale(num: number) {

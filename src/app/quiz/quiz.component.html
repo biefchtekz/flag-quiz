@@ -1,13 +1,22 @@
 <div class="wrap">
+  <div>
+    <span class="material-icons hp" [ngClass]="{invalid: hp < 1}">favorite</span>
+    <span class="material-icons hp" [ngClass]="{invalid: hp < 2}">favorite</span>
+    <span class="material-icons hp" [ngClass]="{invalid: hp < 3}">favorite</span>
+  </div>
   <img
     src="http://purecatamphetamine.github.io/country-flag-icons/3x2/{{randCountry}}.svg"
     class="flag"
   />
   <div class="answer-buttons" id="answerButtons">
-    <button class="answ-btn" (click)="selectAnsw(0); checkAnsw()" id="0">{{currLocale[answButtons[0]].name}}</button>
-    <button class="answ-btn" (click)="selectAnsw(1); checkAnsw()" id="1">{{currLocale[answButtons[1]].name}}</button>
-    <button class="answ-btn" (click)="selectAnsw(2); checkAnsw()" id="2">{{currLocale[answButtons[2]].name}}</button>
-    <button class="answ-btn" (click)="selectAnsw(3); checkAnsw()" id="3">{{currLocale[answButtons[3]].name}}</button>
+    <button class="answ-btn" (click)="selectAnsw(0); checkAnsw()" id="0">{{currLocale.Countries[answButtons[0]].name}}</button>
+    <button class="answ-btn" (click)="selectAnsw(1); checkAnsw()" id="1">{{currLocale.Countries[answButtons[1]].name}}</button>
+    <button class="answ-btn" (click)="selectAnsw(2); checkAnsw()" id="2">{{currLocale.Countries[answButtons[2]].name}}</button>
+    <button class="answ-btn" (click)="selectAnsw(3); checkAnsw()" id="3">{{currLocale.Countries[answButtons[3]].name}}</button>
+  </div>
+  <div class="answer-buttons nav-buttons">
+    <button class="nav-btn btn-home" (click)="returnHome()" id="4">{{currLocale.homeButton}}</button>
+    <button class="nav-btn btn-next" [ngClass]="{invalid: post == -1}" (click)="next()" id="5">{{currLocale.nextButton}}</button>
   </div>
 </div>
 
