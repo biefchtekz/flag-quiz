@@ -9,7 +9,6 @@ import {Subject} from "rxjs";
 export class NavbarComponent implements OnInit {
 
   EngLocale = false
-  reloadLocale$ = new Subject<void>()
   constructor() { }
 
   ngOnInit(): void {

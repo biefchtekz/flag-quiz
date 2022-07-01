@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EngModule} from "../localizations/eng.module";
-import {SharedService} from "../shared.service";
+import {UAModule} from "../localizations/ua.module";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-start-page',
@@ -11,20 +12,31 @@ export class StartPageComponent implements OnInit {
 
   randFlag: string = 'UA'
   countryCode = this.EngLocale.CountryCodes
+  startState: boolean = true;
+  currlocale = ''
 
   constructor(
     private EngLocale: EngModule,
-    private sharedService: SharedService
+    private UALocale: UAModule,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    setInterval(() => {
-      let randNum = Math.floor(Math.random() * this.countryCode.length) + 0
-      this.randFlag = this.countryCode[randNum].code
-    },1000)
+    localStorage.getItem('lang')
+    //@ts-ignore
+    if (localStorage.getItem("lang") == 1) this.currlocale = this.UALocale.startButton
+    //@ts-ignore
+    else if (localStorage.getItem("lang") == 2) this.currlocale = this.EngLocale.startButton
+    // setInterval(() => {
+    //   let randNum = Math.floor(Math.random() * this.countryCode.length) + 0
+    //   this.randFlag = this.countryCode[randNum].code
+    // },1000)
+    sessionStorage.clear()
   }
 
   start() {
-    this.sharedService.sendClickEvent()
+    // this.sharedService.sendClickEvent()
+    sessionStorage.setItem('startState', '1')
+    this.router.navigate(['/play'])
   }
 }

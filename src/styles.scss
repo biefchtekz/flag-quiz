@@ -65,14 +65,21 @@ body{
     border: 1px solid rgba(0, 0, 0, 0.3);
     cursor: pointer;
   }
+  .langs{
+    height: 2rem;
+  }
 }
 
 .start{
   position: relative;
   display: flex;
-  justify-content: center;
+  align-items: center;
   max-width: 100vmin;
+  .start-page-flag{
+    z-index: -1;
+  }
   .start-button{
+    margin-top: 5rem;
     font-size: 3rem;
     font-weight: 600;
     font-family: Calibri;
@@ -80,10 +87,9 @@ body{
     border: 1px solid rgba(0, 0, 0, 0.7);
     border-radius: 1rem;
     width: 50%;
-    height: 200%;
+    height: 100%;
     cursor: pointer;
     transition: background-color .2s;
-    margin-top: -37%;
     color: white;
     -webkit-text-stroke: 1px black;
     &:hover{

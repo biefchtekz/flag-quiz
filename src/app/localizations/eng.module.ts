@@ -176,4 +176,6 @@ export class EngModule {
     {"name": "Zimbabwe", "code": "ZW"}
   ]
 
+  startButton = 'Start Your Journey'
+
 }
