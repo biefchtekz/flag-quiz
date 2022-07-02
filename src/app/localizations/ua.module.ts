@@ -187,5 +187,6 @@ export class UAModule {
   yes = 'Так, закінчити'
   returnTitle = 'На головну'
   score = 'Рахунок'
+  correctAnsw = 'Правильна відповідь'
 
 }

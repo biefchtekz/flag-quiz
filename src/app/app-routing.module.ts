@@ -3,12 +3,15 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {QuizComponent} from "./quiz/quiz.component";
 import {StartPageComponent} from "./start-page/start-page.component";
 import {TestComponent} from "./test/test.component";
+import {NavbarComponent} from "./navbar/navbar.component";
 
 const routes: Routes = [
-    {path: '', redirectTo: '/', pathMatch: 'full'},
-    {path: '', component: StartPageComponent},
-    {path: 'play', component: QuizComponent},
-    {path: 'test', component: TestComponent}
+  {path: '', component: NavbarComponent, children:[
+      {path: '', redirectTo: '/', pathMatch: 'full'},
+      {path: '', component: StartPageComponent},
+      {path: 'play', component: QuizComponent},
+      {path: 'test', component: TestComponent}
+    ]}
 ];
 
 @NgModule({

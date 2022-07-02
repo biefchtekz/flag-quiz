@@ -22,7 +22,6 @@ export class StartPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    localStorage.getItem('lang')
     //@ts-ignore
     if (localStorage.getItem("lang") == 1) this.currlocale = this.UALocale.startButton
     //@ts-ignore

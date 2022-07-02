@@ -187,4 +187,6 @@ export class EngModule {
   returnTitle = 'Return home'
   langChoose = 'Choose language'
   score = 'Your score'
+  correctAnsw = 'Is right answer'
+
 }

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {DialogComponent} from "../dialogs/returnDialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {EndDialogComponent} from "../dialogs/end-dialog/end-dialog.component";
+import {CorrectAnswerComponent} from "../dialogs/correct-answer/correct-answer.component";
 
 
 @Component({
@@ -32,7 +33,6 @@ export class QuizComponent implements OnInit {
   correctAnswPos = -1
   currLocale: any
   correctCounter: string | null = ''
-  returnHomeBool = false
 
   ngOnInit(){
     this.correctCounter = sessionStorage.getItem('counter')
@@ -56,14 +56,14 @@ export class QuizComponent implements OnInit {
     this.correctAnswPos = -1
     this.randNum = this.randomInRange(0, 164)
     this.answerVar(this.randNum)
-    sessionStorage.setItem('country', this.countryListEng.Countries[this.randNum].code)
+    sessionStorage.setItem('country', JSON.stringify(this.randNum) )
     sessionStorage.setItem('selectedPos', '-1')
     this.play()
   }
 
   play(){
     // @ts-ignore
-    this.randCountry = sessionStorage.getItem('country')
+    this.randCountry = this.countryListEng.Countries[JSON.parse(sessionStorage.getItem('country'))].code
     // @ts-ignore
     this.answButtons = JSON.parse(sessionStorage.getItem('answers'))
     // @ts-ignore
@@ -90,22 +90,22 @@ export class QuizComponent implements OnInit {
     return Math.floor(Math.random() * max) + min
   }
 
-  randNotRepeat(correctAnsw: number): number{
-    let num = this.randomInRange(0, 164)
-    if (num == correctAnsw || this.answButtons.includes(num)){
-      return this.randNotRepeat(correctAnsw)
-    } else {
-      return num
+  randNotRepeat(pos: number, cycles: number, correctAnsw: number, answers: number[]){
+    for (let i=pos; i<cycles; i++){
+      let num = this.randomInRange(0, 164)
+      if (num == correctAnsw || answers.includes(num)){
+        this.randNotRepeat(pos, cycles, correctAnsw, answers)
+      } else {
+        answers[i] = num
+      }
     }
+    return answers
   }
 
   answerVar(correctAnsw: number){
     let answers = [-1, -1, -1, -1]
     let corrPos = this.randomInRange(0, 4)
-    for (let i=0; i<4;i++){
-      let num = this.randNotRepeat(correctAnsw)
-      answers[i] = num
-    }
+    answers = this.randNotRepeat(0, 4, correctAnsw, answers)
     answers[corrPos] = correctAnsw
     sessionStorage.removeItem('answers')
     sessionStorage.setItem('corrPos', JSON.stringify(corrPos))
@@ -134,10 +134,13 @@ export class QuizComponent implements OnInit {
         // @ts-ignore
         let hp = JSON.parse(sessionStorage.getItem('hpLeft'))
         hp--
-        sessionStorage.setItem('hpLeft', JSON.stringify(hp))
-        if (hp == 0) this.returnHome()
+        // @ts-ignore
+        setInterval(this.correctDialog('200ms', '200ms').subscribe(res => {
+          if (hp == 0) this.returnHome()
+        }),500)
         // @ts-ignore
         document.getElementById(pos).style.background = 'rgba(255, 0, 0, 0.5)'
+        sessionStorage.setItem('hpLeft', JSON.stringify(hp))
       }
       // @ts-ignore
       document.getElementById('answerButtons').style.pointerEvents = 'none'
@@ -146,6 +149,14 @@ export class QuizComponent implements OnInit {
 
   homeDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
     let dialogRef = this.dialog.open(DialogComponent, {
+      enterAnimationDuration,
+      exitAnimationDuration,
+    })
+    return dialogRef.afterClosed()
+  }
+
+  correctDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
+    let dialogRef =  this.dialog.open(CorrectAnswerComponent, {
       enterAnimationDuration,
       exitAnimationDuration,
     })
