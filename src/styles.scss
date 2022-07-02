@@ -119,14 +119,27 @@ body{
     }
   }
 }
-
-.hp{
-  font-size: 3rem;
-  color: red;
-  &.invalid{
-    color: #dadada;
+.status-bar{
+  display: flex;
+  align-items: center;
+  font-family: Calibri;
+  font-weight: 600;
+  padding-bottom: 10px;
+  .hp{
+    font-size: 3rem;
+    color: red;
+    &.invalid{
+      color: #dadada;
+    }
+  }
+  p{
+    margin: 0 15px;
+    color: #333333;
+    line-height: 0;
+    font-size: 3rem;
   }
 }
+
 @media screen and (max-width: 600px) {
   .wrap{
     padding: 1rem 20px 0;

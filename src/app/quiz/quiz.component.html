@@ -1,8 +1,10 @@
 <div class="wrap">
-  <div>
+  <div class="status-bar">
     <span class="material-icons hp" [ngClass]="{invalid: hp < 1}">favorite</span>
     <span class="material-icons hp" [ngClass]="{invalid: hp < 2}">favorite</span>
     <span class="material-icons hp" [ngClass]="{invalid: hp < 3}">favorite</span>
+    <p>|</p>
+    <p>{{correctCounter}}</p>
   </div>
   <img
     src="http://purecatamphetamine.github.io/country-flag-icons/3x2/{{randCountry}}.svg"
@@ -19,6 +21,5 @@
     <button class="nav-btn btn-next" [ngClass]="{invalid: post == -1}" (click)="next()" id="5">{{currLocale.nextButton}}</button>
   </div>
 </div>
-
 
 

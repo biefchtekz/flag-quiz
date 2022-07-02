@@ -28,8 +28,10 @@ export class QuizComponent implements OnInit {
   correctAnswPos = -1
   currLocale: any
   usedFlagsArray = []
+  correctCounter: string | null = ''
 
   ngOnInit(){
+    this.correctCounter = sessionStorage.getItem('counter')
     // @ts-ignore
     if (localStorage.getItem("lang") == 1) {this.currLocale = this.countryListUA}
     // @ts-ignore
@@ -40,6 +42,7 @@ export class QuizComponent implements OnInit {
       sessionStorage.setItem('usedFlags', JSON.stringify(this.usedFlagsArray))
       sessionStorage.setItem('hpLeft', '3')
       sessionStorage.setItem('startState', '0')
+      sessionStorage.setItem('counter', '0')
     }
     else this.play()
   }
@@ -64,13 +67,14 @@ export class QuizComponent implements OnInit {
     this.checkAnsw()
   }
 
-  randomFlag(min: number, max: number) {
+  randomFlag(min: number, max: number): any {
     let rand = Math.floor(Math.random() * max) + min
     // @ts-ignore
     let usedFlags = JSON.parse(sessionStorage.getItem('usedFlags'))
+    console.log(usedFlags)
     // @ts-ignore
     if (usedFlags.includes(rand)) {
-      return this.randomInRange(min, max)
+      return this.randomFlag(min, max)
     } else {
       usedFlags.push(rand)
       sessionStorage.setItem('usedFlags', JSON.stringify(usedFlags))
@@ -111,6 +115,8 @@ export class QuizComponent implements OnInit {
   checkAnsw() {
     let pos = sessionStorage.getItem('selectedPos')
     // @ts-ignore
+    let counter = JSON.parse(sessionStorage.getItem('counter'))
+    // @ts-ignore
     this.post = +pos
     // @ts-ignore
     if (pos != -1){
@@ -118,6 +124,8 @@ export class QuizComponent implements OnInit {
       if (pos == this.correctAnswPos) {
         //@ts-ignore
         document.getElementById(pos).style.background = 'rgba(0, 255, 0, 0.5)'
+        counter++
+        sessionStorage.setItem('counter', JSON.stringify(counter))
       } else {
         // @ts-ignore
         let hp = JSON.parse(sessionStorage.getItem('hpLeft'))
