@@ -44,6 +44,9 @@ body{
   border-radius: 1vmin;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
+.hidden{
+  display: none;
+}
 .wrap{
   margin: 0 auto;
   max-width: 80vmin;

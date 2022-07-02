@@ -1,4 +1,9 @@
-<div class="wrap">
+<img
+  [src]="imgSrc+randCountry+end"
+  class="flag hidden"
+  (load)="flagHere = true"
+/>
+<div class="wrap" *ngIf="flagHere; else loading">
   <div class="status-bar">
     <span class="material-icons hp" [ngClass]="{invalid: hp < 1}">favorite</span>
     <span class="material-icons hp" [ngClass]="{invalid: hp < 2}">favorite</span>
@@ -7,7 +12,7 @@
     <p>{{correctCounter}}</p>
   </div>
   <img
-    src="http://purecatamphetamine.github.io/country-flag-icons/3x2/{{randCountry}}.svg"
+    [src]="imgSrc+randCountry+end"
     class="flag"
   />
   <div class="answer-buttons" id="answerButtons">
@@ -21,5 +26,8 @@
     <button class="nav-btn btn-next" [ngClass]="{invalid: post == -1}" (click)="next()" id="5">{{currLocale.nextButton}}</button>
   </div>
 </div>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" style="height: 10px"></mat-progress-bar>
+</ng-template>
 
 

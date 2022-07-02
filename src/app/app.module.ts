@@ -17,6 +17,7 @@ import { EndDialogComponent } from './dialogs/end-dialog/end-dialog.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CorrectAnswerComponent } from './dialogs/correct-answer/correct-answer.component';
+import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -36,11 +37,10 @@ import { CorrectAnswerComponent } from './dialogs/correct-answer/correct-answer.
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatProgressBarModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],

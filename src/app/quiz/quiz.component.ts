@@ -7,7 +7,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {EndDialogComponent} from "../dialogs/end-dialog/end-dialog.component";
 import {CorrectAnswerComponent} from "../dialogs/correct-answer/correct-answer.component";
 
-
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -33,6 +32,9 @@ export class QuizComponent implements OnInit {
   correctAnswPos = -1
   currLocale: any
   correctCounter: string | null = ''
+  imgSrc: string = 'http://purecatamphetamine.github.io/country-flag-icons/3x2/'
+  end = '.svg'
+  flagHere: boolean = false
 
   ngOnInit(){
     this.correctCounter = sessionStorage.getItem('counter')
