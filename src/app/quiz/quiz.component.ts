@@ -2,6 +2,9 @@ import {Component,  OnInit} from '@angular/core';
 import {UAModule} from "../localizations/ua.module";
 import {EngModule} from "../localizations/eng.module";
 import {Router} from "@angular/router";
+import {DialogComponent} from "../dialogs/returnDialog/dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {EndDialogComponent} from "../dialogs/end-dialog/end-dialog.component";
 
 
 @Component({
@@ -14,7 +17,8 @@ export class QuizComponent implements OnInit {
   constructor(
     private UALocal : UAModule,
     private EngLocal: EngModule,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   // @ts-ignore
@@ -27,8 +31,8 @@ export class QuizComponent implements OnInit {
   answButtons = [-1, -1, -1, -1]
   correctAnswPos = -1
   currLocale: any
-  usedFlagsArray = []
   correctCounter: string | null = ''
+  returnHomeBool = false
 
   ngOnInit(){
     this.correctCounter = sessionStorage.getItem('counter')
@@ -39,7 +43,7 @@ export class QuizComponent implements OnInit {
     // @ts-ignore
     if (sessionStorage.getItem('startState') == 1) {
       this.startPlaying()
-      sessionStorage.setItem('usedFlags', JSON.stringify(this.usedFlagsArray))
+      sessionStorage.setItem('usedFlags', '[]')
       sessionStorage.setItem('hpLeft', '3')
       sessionStorage.setItem('startState', '0')
       sessionStorage.setItem('counter', '0')
@@ -74,7 +78,7 @@ export class QuizComponent implements OnInit {
     console.log(usedFlags)
     // @ts-ignore
     if (usedFlags.includes(rand)) {
-      return this.randomFlag(min, max)
+      this.randomFlag(min, max)
     } else {
       usedFlags.push(rand)
       sessionStorage.setItem('usedFlags', JSON.stringify(usedFlags))
@@ -140,15 +144,33 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  homeDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      enterAnimationDuration,
+      exitAnimationDuration,
+    })
+    return dialogRef.afterClosed()
+  }
+
+  lostDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
+    this.dialog.open(EndDialogComponent, {
+      enterAnimationDuration,
+      exitAnimationDuration,
+    })
+    this.router.navigate(['/'])
+  }
+
   returnHome() {
     // @ts-ignore
     if (sessionStorage.getItem('hpLeft') == 0) {
-      alert(this.currLocale.lost)
-      this.router.navigate(['/'])
+      this.lostDialog('200ms', '200ms')
     } else {
-      if (confirm(this.currLocale.home)) {
-        this.router.navigate(['/'])
-      }
+      this.homeDialog('200ms', '200ms')
+          .subscribe(res => {
+            if (JSON.parse(res)) {
+              this.lostDialog('200ms', '200ms')
+            }
+          })
     }
 
   }

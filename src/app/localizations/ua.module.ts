@@ -180,7 +180,12 @@ export class UAModule {
   homeButton = 'На головну'
   nextButton = 'Далі'
   home = 'Дійсно закінчити гру?'
-  lost = 'Ти витратив усі спроби'
+  lost = 'Гру закінчено'
   langChoose = 'Виберіть мову'
+  endGame = 'Дійсно закінчити гру?'
+  no = 'Ні, грати далі'
+  yes = 'Так, закінчити'
+  returnTitle = 'На головну'
+  score = 'Рахунок'
 
 }

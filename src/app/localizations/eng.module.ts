@@ -180,6 +180,11 @@ export class EngModule {
   homeButton = 'Home'
   nextButton = 'Next'
   home = 'Really want to leave?'
-  lost = 'You wasted all attempts'
+  lost = 'Game ended'
+  endGame = 'Do you really want to end game?'
+  no = 'No, keep playing'
+  yes = 'Yes, end the game'
+  returnTitle = 'Return home'
   langChoose = 'Choose language'
+  score = 'Your score'
 }
